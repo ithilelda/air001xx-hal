@@ -88,6 +88,7 @@ pub fn configure_sys_clk(config: &SysClkConfig, rcc: &air001xx_pac::Rcc, flash: 
             match config.pll_source {
                 Some(PllSource::Hsi) => {
                     let hsi_config = config.hsi_config.unwrap();
+                    assert!(hsi_config.rate.clk_rate() > 16_000_000, "HSI clock rate must be above 16MHz When PLL source is HSI");
                     let hsi_clk = configure_hsi(&hsi_config, rcc);
                     rcc.pllcfgr().modify(|_, w| w.pllsrc().clear_bit()); // set HSI as PLL source.
                     rcc.cr().modify(|_, w| w.pllon().set_bit()); // enable PLL.
