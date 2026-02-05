@@ -1,0 +1,9 @@
+[package]
+name = "air001xx-hal"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+air001xx-pac = { version = "1.1.2", features = ["rt", "critical-section"] }
+cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7.5"
